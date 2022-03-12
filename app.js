@@ -2,7 +2,12 @@ const { Client } = require('pg');
 
 const express = require('express');
 const app = express();
-const client = new Client();
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+});
 (async function() {await client.connect()})();
 const bodyParser = require('body-parser');
 const PORT = process.env.port || 5000;
