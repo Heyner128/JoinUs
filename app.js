@@ -5,7 +5,7 @@ const app = express();
 const client = new Client();
 (async function() {await client.connect()})();
 const bodyParser = require('body-parser');
-const PORT - process.env.port || 5000;
+const PORT = process.env.port || 5000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', "ejs");
