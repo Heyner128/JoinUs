@@ -2,7 +2,7 @@ const { Client } = require('pg');
 
 const express = require('express');
 const app = express();
-const envtype = "local"
+const envtype = "remote"
 const client = new Client(envtype=="remote"?{
     connectionString: process.env.DATABASE_URL,
     ssl: {
