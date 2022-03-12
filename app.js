@@ -2,15 +2,16 @@ const { Client } = require('pg');
 
 const express = require('express');
 const app = express();
-const client = new Client({
+const envtype = "local"
+const client = new Client(envtype=="remote"?{
     connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false
     }
-});
+}:null);
 (async function() {await client.connect()})();
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 5000;
+const PORT = envtype=="remote"?process.env.PORT || 5000:3000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', "ejs");
